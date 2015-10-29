@@ -179,3 +179,74 @@ Also:
 </body>
 </html>
 ```
+
+### Directives
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS | Directives</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</head>
+<body>
+	<h2>Angular JS Directives</h2>
+	<br><br>
+	<h3>Repeating elements...</h3>
+	<br>
+
+	<div ng-app="" ng-init="cats=['Kitty', 'Barbie', 'Johnny'];
+							dogs=[{name: 'Jack', color: 'brown'}, {name: 'Ted', color: 'black'}, {name: 'Chee', color: 'blonde'}];
+							">
+		Cat names are:
+		<ul>
+			<li ng-repeat='x in cats'>
+				{{ x }}
+			</li>
+		</ul>
+		<br><br>
+
+		Dog names and colors are:
+		<ul>
+			<li ng-repeat='x in dogs'>
+				{{ x.name + " has color " + x.color + " :)"}}
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
+
+```
+
+Some Wisdom*:
+
+The **ng-app** Directive
+
+
+- The ng-app directive defines the root element of an AngularJS application.
+	
+- The ng-app directive will auto-bootstrap (automatically initialize) the application when a web page is loaded.
+- ng-app can have a value (like ng-app="myModule"), to connect code modules.
+
+The **ng-init** Directive
+- The ng-init directive defines initial values for an AngularJS application.
+- Normally, you will not use ng-init. You will use a controller or module instead.
+
+The **ng-model** Directive
+- The ng-model directive binds the value of HTML controls (input, select, textarea) to application data.
+- The ng-model directive can also:
+		
+	- Provide type validation for application data (number, email, required).
+		
+	- Provide status for application data (invalid, dirty, touched, error).
+		
+	- Provide CSS classes for HTML elements.
+		
+	- Bind HTML elements to HTML forms.
+
+The **ng-repeat** Directive
+	
+- The ng-repeat directive clones HTML elements once for each item in a collection (in an array). 
+
+**not my words - from W3school*
