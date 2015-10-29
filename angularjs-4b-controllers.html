@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS | Controllers 2</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</head>
+<body>
+	<h2>Angular JS Controllers Part 2</h2>
+	
+	<div ng-app="catApp" ng-controller="catsCtrl">
+		<ul>
+			<li ng-repeat="x in cats">
+				{{ x.name + " has color: " + x.color }}
+			</li>
+		</ul>
+	</div>
+
+	<script src="angularjs-4b-controllers.js"></script>
+</body>
+</html>
