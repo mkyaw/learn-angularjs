@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS | Expressions</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</head>
+<body>
+	<h2>Angular JS Expressions</h2>
+	<div ng-app="" 
+		ng-init="unit_price=5; qty=20; 
+				fname='myo'; lname='kyaw'; 
+				cat={name : 'Romie', sound : 'meowwww'};
+				luckyno=[7, 14, 21, 35, 42, 49, 99] ">
+		Sum of 5 and 5 is: {{ 5 + 5 }}
+		<br><br>
+		Total is: {{ unit_price * qty }}
+		<br><br>
+		Full name is: {{ fname + " " + lname }}
+		
+		<br><br>
+		
+		<!-- expression with object -->
+		<h3>Taking cats seriously...</h3>
+		{{ cat.name }} makes the sound: {{ cat.sound }}
+		<br><br>
+		So, it is obvious the cat's name is <span ng-bind='cat.name'></span> :)
+
+		<br><br>
+
+		<!-- expression with array -->
+		<h3>Lucky numbers...</h3>
+		My first lucky number is: {{ luckyno[0] }}
+		<br>
+		Making my second lucky number: <span ng-bind='luckyno[1]'></span>
+		<br>
+		Guess what my last lucky number is: {{ luckyno[6] }}
+	</div>
+</body>
+</html>
