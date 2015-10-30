@@ -1,5 +1,5 @@
-Angular JS
----------
+# Angular JS
+
 ```
 <!DOCTYPE html>
 <html lang="en-US">
@@ -35,7 +35,8 @@ The **ng-bind** directive binds the innerHTML of the `<p>` element to the applic
 
 The **ng-init** directive initialize AngularJS application variables.
 
-### Expressions
+## Expressions
+
 ```
 <!DOCTYPE html>
 <html>
@@ -113,7 +114,7 @@ JS (not AngularJS):  support conditionals, loops, and exceptions.
 
 
 
-### Module and Controller
+## Module and Controller
 
 ```
 <!DOCTYPE html>
@@ -180,7 +181,7 @@ Also:
 </html>
 ```
 
-### Directives
+## Directives
 
 ```
 <!DOCTYPE html>
@@ -250,3 +251,96 @@ The **ng-repeat** Directive
 - The ng-repeat directive clones HTML elements once for each item in a collection (in an array). 
 
 **not my words - from W3school*
+
+### Separate HTML and JavaScript files
+
+*angularjs-4b-controllers.html*
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS | Controllers 2</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</head>
+<body>
+	<h2>Angular JS Controllers Part 2</h2>
+	
+	<div ng-app="catApp" ng-controller="catsCtrl">
+		<ul>
+			<li ng-repeat="x in cats">
+				{{ x.name + " has color: " + x.color }}
+			</li>
+		</ul>
+	</div>
+
+	<script src="angularjs-4b-controllers.js"></script>
+</body>
+</html>
+
+```
+
+*angularjs-4b-controllers.js*
+
+```
+angular.module('catApp', []).controller('catsCtrl', function($scope){
+	$scope.cats = [
+		{name : 'Jack', color : 'brown'},
+		{name : 'Ted', color : 'black'},
+		{name : 'Kit', color : 'white'}
+	]
+});
+```
+
+## Filters
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS | Filters</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</head>
+<body>
+	<h2>Angular JS Filters</h2>
+	
+	<div ng-app="myAngularApp" ng-controller="myAngularCtrl">
+		<label>First Name:</label>
+		<input type="text" ng-model="fname" placeholder="John">
+		<br><br>
+		<label>Last Name:</label>
+		<input type="text" ng-model="lname" placeholder="Smith">
+		<br><br>
+		Your Name is: {{lname + ", " + fname}}
+		<br><br>
+		
+		<!-- "| uppercase" is a filter -->
+		Your Fullname is: {{fullName() | uppercase}}
+
+		<br><br><br>
+
+		Quantity: <input type="text" ng-model="qty">
+		<br><br>
+		Unit Price: <input type="text" ng-model="unitprice">
+		<br><br>
+		
+		<!-- "| currency" is a filter -->
+		Total: {{ qty * unitprice | currency }}
+	</div>
+
+	<script>
+		angular.module('myAngularApp', []).controller('myAngularCtrl', function($scope){
+			$scope.fname = "John";
+			$scope.lname = "Smith";
+			$scope.fullName = function() {
+				return $scope.fname + " " + $scope.lname;
+			}
+		});
+
+	</script>
+
+</body>
+</html>
+```
