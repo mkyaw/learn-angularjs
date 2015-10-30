@@ -344,3 +344,52 @@ angular.module('catApp', []).controller('catsCtrl', function($scope){
 </body>
 </html>
 ```
+
+## "http" - get JSON
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS | http</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</head>
+<body>
+	<h2>Angular JS "http"</h2>
+	
+	<div ng-app="myAngularApp" ng-controller="myAngularCtrl">
+		<ul>
+			<li ng-repeat="x in names">
+				{{ x.Name + ', ' + x.Country }}
+			</li>
+		</ul>
+	</div>
+
+	<!-- 
+
+	$http is an XMLHttpRequest object for requesting external data.
+
+	$http.get() reads JSON data from http://www.w3schools.com/angular/customers.php.
+
+	If success, the controller creates a property (names) in the scope, with JSON data from the server. 
+
+	-->
+	<script>
+		// Shortcut w/o declaring "app"
+		// angular.module('myAngularApp', []).controller('myAngularCtrl', function($scope, $http){
+		// });
+		
+		app = angular.module('myAngularApp', []);
+		
+		app.controller('myAngularCtrl', function($scope, $http) {
+			$http.get("http://www.w3schools.com/angular/customers.php").success(function(response){
+				$scope.names = response.records;
+			});
+		});
+
+	</script>
+
+</body>
+</html>
+```
