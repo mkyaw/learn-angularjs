@@ -16,7 +16,7 @@
 		<input type="text" ng-model="major">
 		<br />
 		<ul>
-			<li ng-repeat="stud in students | filter:major | orderBy: 'name'">
+			<li ng-repeat="stud in students | filter:major | orderBy: 'tuition'">
 				{{stud.name | uppercase}}  - {{ stud.major | lowercase}} (owes {{ stud.tuition | currency}} )
 				  <!-- - {{stud.major | lowercase}} Major - owes {{stud.tuition | currency}} -->
 			</li>

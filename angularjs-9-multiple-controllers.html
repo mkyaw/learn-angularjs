@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS | Controller and View (Scope as glue)</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+	<h2>Angular JS Multiple Controllers</h2>
+	<br><br>
+	
+	<h3>First controller (myCtrl)</h3>
+	<div ng-controller="myCtrl">
+		<input type="text" ng-model="name">
+		<br><br>
+		{{name}}
+	</div>
+
+	<br><br>
+	<hr>
+	
+	<h3>Another controller (catCtrl)</h3>
+	<div ng-controller="catCtrl">
+		<ol>
+			<li ng-repeat="x in cats">
+				{{x}}
+			</li>
+		</ol>
+	</div>
+	
+
+	<script>
+		// ***** ALT 1 TO CREATE APP AND CONTROLLER *****
+
+		// var app = angular.module("myApp", []);
+
+		// app.controller("myCtrl", function($scope){
+		// 	$scope.name = "Myo";
+		// });
+
+
+
+		// ***** ALT 2 TO CREATE APP AND CONTROLLER ******
+		
+		var app = angular.module("myApp", []);
+		
+		var controllers = {};
+		
+		controllers.myCtrl = function($scope) {
+			$scope.name = "Myo";
+		};
+
+		controllers.catCtrl = function($scope) {
+			$scope.cats = ["Jack", "Joe", "Kitty"];
+		}
+		
+		app.controller(controllers);
+		
+	</script>
+</body>
+</html>
