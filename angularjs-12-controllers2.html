@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS | Controllers 2.0</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<script>
+		// ANOTHER WAY TO CONFIGURE A CONTROLLER
+
+		// angular.module("myApp", []).controller("MessageController", function($scope){
+		// 	$scope.message = "This is a model.";
+		// });
+
+		angular.module('myApp', []).config(['$controllerProvider', function($controllerProvider) {
+			$controllerProvider.allowGlobals();
+		}]);
+
+		function MessageController($scope) {
+			$scope.message = "This is a model.";
+		}
+
+		function CountController($scope) {
+			$scope.count = function(){ return 12; }
+		}
+
+		function SumController($scope) {
+			$scope.numOne = 0;
+			$scope.numTwo = 0;
+			$scope.sum = function() {
+				return $scope.numOne + $scope.numTwo;
+			}
+			$scope.options = [0,1,2,3,4];
+		}
+
+		function SumController2($scope) {
+			$scope.number = 2;
+			$scope.sum = function(numOne, numTwo) {
+				return numOne + numTwo;
+			}
+		}
+
+		function AuthController($scope) {
+			$scope.authorized = true;
+			$scope.toggle = function() {
+				$scope.authorized = !$scope.authorized;
+			}
+		}
+	</script>
+
+</head>
+<body ng-app="myApp" class="jumbotron" style="margin:20px;">
+	<em>MessageController</em>
+	<div ng-controller="MessageController">
+		<h2>{{message}}</h2>
+	</div>
+
+	<hr />
+
+	<em>CountController</em>
+	<p ng-controller="CountController">
+		There are {{count()}} pencils in a dozen box.
+	</p>
+
+	<hr />
+
+	<em>SumController</em>
+	<p ng-controller="SumController">
+		<select ng-model="numOne" ng-options="x for x in options"></select>
+		<select ng-model="numTwo" ng-options="x for x in options"></select>
+		= {{sum()}}
+	</p>
+
+	<hr />
+
+	<em>SumController2</em>
+	<p ng-controller="SumController2">
+		{{sum(number,2)}} is not the same as {{sum(number,"2")}}
+		<br />
+		2 + 2 + 2 + 2 = {{sum(2, sum(2, sum(2,2)))}}
+	</p>
+
+	<hr />
+
+	<em>AuthController</em>
+	<p ng-controller="AuthController">
+		The secret code is: 
+		<span ng-show='authorized'>124648</span>
+		<span ng-hide='authorized'>Not authorized to view!</span>
+		<br />
+		<button class="btn btn-sm btn-danger" ng-click="toggle()">Toggle!</button>
+	</p>
+
+</body>
+</html>
