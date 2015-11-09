@@ -347,6 +347,12 @@ angular.module('catApp', []).controller('catsCtrl', function($scope){
 
 ## "http" - get JSON
 
+- $http is an XMLHttpRequest object for requesting external data.
+
+- $http.get() reads JSON data from http://www.w3schools.com/angular/customers.php.
+
+- If success, the controller creates a property (names) in the scope, with JSON data from the server. 
+
 ```
 <!DOCTYPE html>
 <html>
@@ -376,7 +382,7 @@ angular.module('catApp', []).controller('catsCtrl', function($scope){
 
 	-->
 	<script>
-		// Shortcut w/o declaring "app"
+		// --Shortcut w/o declaring "app"--
 		// angular.module('myAngularApp', []).controller('myAngularCtrl', function($scope, $http){
 		// });
 		
@@ -392,4 +398,184 @@ angular.module('catApp', []).controller('catsCtrl', function($scope){
 
 </body>
 </html>
+```
+
+## Directives, Filters and Binding
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS | Directives, Filters and Data Binding</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</head>
+<body>
+	<h2>Angular JS Directives, Filters and Data Binding</h2>
+	<br><br>
+	
+	<div ng-app="" ng-init="students= 	[{ name : 'John Smith',	major : 'CIS', tuition : 3000},
+										{ name : 'John Doe', 	major : 'CIS', tuition : 2000},
+										{ name : 'Jane Doe',	major : 'IBM', tuition : 5000},
+										{ name : 'Jack Dan',	major : 'HRT', tuition : 1500},
+										{ name : 'Anne Michaels',	major : 'MHR', tuition : 1000},
+										{ name : 'Craigs Dave',	major : 'CS', tuition : 500},
+										{ name : 'Myo Kyaw',	major : 'CIS', tuition : 200},
+										{ name : 'Mark Lutz',	major : 'FRL', tuition : 1000},
+										{ name : 'John Flanagan',	major : 'MHR', tuition : 6000},
+										{ name : 'Johnny Doos',	major : 'ECE', tuition : 1200},
+										{ name : 'Romie Boom',	major : 'ECE', tuition : 2200}, ]">
+		
+	Name:
+	<br />
+	<input type="text" ng-model="name"> {{name}}
+	<br />
+	<ul>
+		<li ng-repeat="stud in students | filter:name | orderBy: 'major' ">
+			{{stud.name | uppercase}}  - {{stud.major | lowercase}} Major - owes {{stud.tuition | currency}}
+		</li>
+	</ul>
+
+	</div>
+</body>
+</html>
+```
+
+## Multiple Controllers
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS | Controller and View (Scope as glue)</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+	<h2>Angular JS Multiple Controllers</h2>
+	<br><br>
+	
+	<h3>First controller (myCtrl)</h3>
+	<div ng-controller="myCtrl">
+		<input type="text" ng-model="name">
+		<br><br>
+		{{name}}
+	</div>
+
+	<br><br>
+	<hr>
+	
+	<h3>Another controller (catCtrl)</h3>
+	<div ng-controller="catCtrl">
+		<ol>
+			<li ng-repeat="x in cats">
+				{{x}}
+			</li>
+		</ol>
+	</div>
+	
+
+	<script>
+		// ***** ALT 1 TO CREATE APP AND CONTROLLER *****
+
+		// var app = angular.module("myApp", []);
+
+		// app.controller("myCtrl", function($scope){
+		// 	$scope.name = "Myo";
+		// });
+
+
+
+		// ***** ALT 2 TO CREATE APP AND CONTROLLER ******
+		
+		var app = angular.module("myApp", []);
+		
+		var controllers = {};
+		
+		controllers.myCtrl = function($scope) {
+			$scope.name = "Myo";
+		};
+
+		controllers.catCtrl = function($scope) {
+			$scope.cats = ["Jack", "Joe", "Kitty"];
+		}
+		
+		app.controller(controllers);
+		
+	</script>
+</body>
+</html>
+```
+_____
+
+## Angular JS Scopes 2.0
+
+ng-click:
+
+```
+<p ng-init="authorized = true">
+  The secret code is
+  <span ng-show="authorized">0123</span>
+  <span ng-hide="authorized">not for you to see</span>
+  <br>
+  <input type="button" value="toggle" ng-click="authorized = !authorized">
+</p>
+```
+
+ng-model:
+
+```
+<input type="text" ng-model="title">
+is bound to
+"<strong>{{title}}</strong>".
+Type something in the box!
+```
+
+ng-init-and-model:
+```
+<input type="text" ng-init="title = 'Angular'" ng-model="title">
+is bound to
+"<strong ng-bind="title"></strong>".
+Change it!
+```
+
+checkbox:
+```
+<input type='checkbox' ng-init='checked = true' ng-model='checked'>
+is bound to
+<strong ng-bind="checked"></strong>.
+Change it!
+```
+
+checkbox-string:
+```
+<input type='checkbox' ng-init='feeling = "love it"' ng-model='feeling'
+    ng-true-value='"love it"' ng-false-value='"hate it"'>
+is bound to
+"<strong ng-bind="feeling"></strong>".
+Change it!
+```
+
+select:
+```
+<select ng-init='answer = "maybe"' ng-model='answer'>
+  <option value='yes' selected>Yes</option>
+  <option value='no'>No</option>
+  <option value='maybe'>Maybe</option>
+</select>
+is bound to
+"<strong ng-bind="answer"></strong>".
+Change it!
+```
+
+radios
+```
+<div ng-init='answer = "maybe"'>
+  <input type='radio' ng-model='answer' value='yes'> Yes
+  <input type='radio' ng-model='answer' value='no'> No
+  <input type='radio' ng-model='answer' value='maybe'> Maybe
+  is bound to
+  "<strong ng-bind="answer"></strong>".
+  Change it!
+</div>
 ```

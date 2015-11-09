@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS | Scopes and Directives 2.0</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body ng-app class="col-xs-10 col-xs-offset-2">
+	<h2>Angular JS Scopes and Directives 2.0</h2>
+	<br><br>
+
+	<h3>ng-click</h3>
+	<p ng-init="authorized = true">
+		Secret code is: 
+		<span ng-show="authorized">1234456</span>
+		<span ng-hide="authorized">not authorized to see</span>
+		<br>
+		<button type="button" class="btn btn-danger" ng-click="authorized = !authorized">Toggle!!</button>
+	</p>
+
+	<br><br>
+
+	<h3>ng-model</h3>
+	<input type="text" ng-model="name"> is bound to <strong ng-bind="name"></strong>
+
+	<br><br><br>
+
+	<h3>ng-init and ng-model</h3>
+	<input type="text" ng-init="title = 'Angular Scopes 2.0'" ng-model="title">
+	is bound to <strong ng-bind='title'></strong>
+
+	<br><br><br>
+
+	<h3>checkbox</h3>
+	<input type="checkbox" ng-init='checked = true' ng-model='checked'>
+	is bound to <strong ng-bind='checked'></strong>. <strong><==</strong> Change this!!
+
+	<br><br><br>
+
+	<h3>checkbox 2</h3>
+	<input type="checkbox" ng-init='feeling = "love it!"' ng-model='feeling' 
+	ng-true-value='"love it!"' ng-false-value='"hate it!"'>
+	is bound to <strong ng-bind="feeling"></strong>
+
+	<br><br><br>
+
+	<h3>select</h3>
+	<select ng-init='answer = "maybe"' ng-model='answer'>
+		<option value="yes" selected>Yes!</option>
+		<option value="no">No!!</option>
+		<option value="maybe">Maybe...</option>
+	</select>
+	is bound to <strong ng-bind='answer'></strong>
+
+	<br><br><br>
+
+	<h3>radios</h3>
+	<div ng-init='color = "blue"'>
+		<input type="radio" ng-model='color' value='blue'>Blue
+		<input type="radio" ng-model='color' value='black'>Black
+		<input type="radio" ng-model='color' value='cyan'>Cyan
+		is bound to <strong ng-bind='color'></strong>
+	</div>
+	
+
+	
+</body>
+</html>
